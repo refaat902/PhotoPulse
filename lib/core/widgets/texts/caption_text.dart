@@ -20,7 +20,7 @@ class CaptionText extends StatelessWidget {
     this.color,
     this.fontSize,
     this.maxLines = 1,
-    this.fontFamily = 'Beiruti',
+    this.fontFamily = 'Kavoon',
     this.overflow = TextOverflow.ellipsis,
     this.textAlign = TextAlign.center,
     this.lineHeight = 0,

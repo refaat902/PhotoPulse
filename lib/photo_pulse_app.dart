@@ -12,6 +12,7 @@ class PhotoPulseApp extends StatelessWidget {
     return ScreenUtilInit(
       designSize: const Size(390, 844),
       builder: (context, child) => MaterialApp.router(
+        theme: ThemeData(scaffoldBackgroundColor: Colors.white),
         builder: EasyLoading.init(),
         title: 'Shoghlana',
         debugShowCheckedModeBanner: false,
