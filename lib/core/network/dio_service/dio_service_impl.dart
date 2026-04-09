@@ -14,9 +14,7 @@ class DioServiceImpl implements DioService {
 
   static SecurityContext? securityContext;
 
-  DioServiceImpl({
-    required this.dioProvider,
-  });
+  DioServiceImpl({required this.dioProvider});
 
   @override
   Future<Response> get({
@@ -40,23 +38,28 @@ class DioServiceImpl implements DioService {
 
     dio.options.baseUrl = base ?? NetworkURLS.baseURL;
 
-    dio.options.headers = {
+    final headers = {
       if (isMultipart) 'Content-Type': 'multipart/form-data',
       if (!isMultipart) 'Content-Type': 'application/json',
       if (!isMultipart) 'Accept': 'application/json',
-      if (apiToken != null) 'API-TOKEN': apiToken,
       'Accept-Language': language,
-      if (token != null) 'Authorization': 'Token $token',
     };
+    if (apiToken != null) {
+      headers['Authorization'] = apiToken;
+    }
+    if (token != null) {
+      headers['Authorization'] = 'Token $token';
+    }
+    dio.options.headers = headers;
 
     Future.wait([loadCertificateForSSLPinning()]);
     HttpClient httpClient = HttpClient(context: securityContext);
     httpClient.badCertificateCallback =
         (X509Certificate cert, String host, int port) {
-      return false;
-    };
-    (dio.httpClientAdapter as IOHttpClientAdapter).createHttpClient =
-        () => httpClient;
+          return false;
+        };
+    (dio.httpClientAdapter as IOHttpClientAdapter).createHttpClient = () =>
+        httpClient;
 
     debugPrint('URL => ${dio.options.baseUrl + endPoint}');
     debugPrint('Header => ${dio.options.headers.toString()}');
@@ -91,23 +94,28 @@ class DioServiceImpl implements DioService {
 
     dio.options.baseUrl = base ?? NetworkURLS.baseURL;
 
-    dio.options.headers = {
+    final headers = {
       if (isMultipart) 'Content-Type': 'multipart/form-data',
       if (!isMultipart) 'Content-Type': 'application/json',
       if (!isMultipart) 'Accept': 'application/json',
-      if (apiToken != null) 'API-TOKEN': apiToken,
       'Accept-Language': language,
-      if (token != null) 'Authorization': 'Token $token',
     };
+    if (apiToken != null) {
+      headers['Authorization'] = apiToken;
+    }
+    if (token != null) {
+      headers['Authorization'] = 'Token $token';
+    }
+    dio.options.headers = headers;
 
     Future.wait([loadCertificateForSSLPinning()]);
     HttpClient httpClient = HttpClient(context: securityContext);
     httpClient.badCertificateCallback =
         (X509Certificate cert, String host, int port) {
-      return false;
-    };
-    (dio.httpClientAdapter as IOHttpClientAdapter).createHttpClient =
-        () => httpClient;
+          return false;
+        };
+    (dio.httpClientAdapter as IOHttpClientAdapter).createHttpClient = () =>
+        httpClient;
 
     debugPrint('URL => ${dio.options.baseUrl + endPoint}');
     debugPrint('Header => ${dio.options.headers.toString()}');
@@ -145,23 +153,28 @@ class DioServiceImpl implements DioService {
 
     dio.options.baseUrl = base ?? NetworkURLS.baseURL;
 
-    dio.options.headers = {
+    final headers = {
       if (isMultipart) 'Content-Type': 'multipart/form-data',
       if (!isMultipart) 'Content-Type': 'application/json',
       if (!isMultipart) 'Accept': 'application/json',
-      if (apiToken != null) 'API-TOKEN': apiToken,
       'Accept-Language': language,
-      if (token != null) 'Authorization': 'Token $token',
     };
+    if (apiToken != null) {
+      headers['Authorization'] = apiToken;
+    }
+    if (token != null) {
+      headers['Authorization'] = 'Token $token';
+    }
+    dio.options.headers = headers;
 
     Future.wait([loadCertificateForSSLPinning()]);
     HttpClient httpClient = HttpClient(context: securityContext);
     httpClient.badCertificateCallback =
         (X509Certificate cert, String host, int port) {
-      return false;
-    };
-    (dio.httpClientAdapter as IOHttpClientAdapter).createHttpClient =
-        () => httpClient;
+          return false;
+        };
+    (dio.httpClientAdapter as IOHttpClientAdapter).createHttpClient = () =>
+        httpClient;
 
     debugPrint('URL => ${dio.options.baseUrl + endPoint}');
     debugPrint('Header => ${dio.options.headers.toString()}');
@@ -178,8 +191,9 @@ class DioServiceImpl implements DioService {
   }
 
   static Future<void> loadCertificateForSSLPinning() async {
-    final ByteData data =
-        await rootBundle.load('assets/certificate/neqabty.pem');
+    final ByteData data = await rootBundle.load(
+      'assets/certificate/neqabty.pem',
+    );
     SecurityContext secContext = SecurityContext(withTrustedRoots: false);
     secContext.setTrustedCertificatesBytes(data.buffer.asUint8List());
     securityContext = secContext;

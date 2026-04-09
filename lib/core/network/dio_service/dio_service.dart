@@ -29,6 +29,7 @@ abstract class DioService {
     ProgressCallback? progressCallback,
     CancelToken? cancelToken,
     Duration? timeOut,
+    
 
     bool isMultipart = false,
   });

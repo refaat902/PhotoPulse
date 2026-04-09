@@ -52,6 +52,8 @@ dependencies:
   root_checker_plus: ^1.0.0
   lottie: ^3.3.2
   flutter_svg: ^2.2.4
+  dartz: ^0.10.1
+  toastification: ^3.0.3
 
 dev_dependencies:
   flutter_test:

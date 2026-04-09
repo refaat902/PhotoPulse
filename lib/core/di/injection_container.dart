@@ -1,4 +1,10 @@
 import 'package:get_it/get_it.dart';
+import 'package:photopulse/features/main/data/data_source/search_data_source.dart';
+import 'package:photopulse/features/main/data/data_source/search_data_source_impl.dart';
+import 'package:photopulse/features/main/data/repository/search_repository_impl.dart';
+import 'package:photopulse/features/main/domain/repository/search_repository.dart';
+import 'package:photopulse/features/main/domain/use_cases/search_use_case.dart';
+import 'package:photopulse/features/main/presentation/cubits/search/search_cubit.dart';
 import '../network/dio_service/dio_provider.dart';
 import '../network/dio_service/dio_service.dart';
 import '../network/dio_service/dio_service_impl.dart';
@@ -10,23 +16,23 @@ final sl = GetIt.instance;
 Future<void> init() async {
   // Bloc
 
-  // sl.registerFactory(() => LoginCubit(loginUseCase: sl()));
+  sl.registerFactory(() => SearchCubit(searchUseCase: sl()));
 
   // UseCases
 
-  // sl.registerLazySingleton<LoginUseCase>(() => LoginUseCase(sl()));
+  sl.registerLazySingleton<SearchUseCase>(() => SearchUseCase(sl()));
 
   // Repository
 
-  // sl.registerLazySingleton<AuthRepository>(
-  //   () => AuthRepositoryImpl(authDataSource: sl(), preferenceHelper: sl()),
-  // );
+  sl.registerLazySingleton<SearchRepository>(
+    () => SearchRepositoryImpl(searchDataSource: sl(), preferenceHelper: sl()),
+  );
   
   // Datasources
 
-  // sl.registerFactory<AuthDataSource>(
-  //   () => AuthDataSourceImpl(dioService: sl()),
-  // );
+  sl.registerFactory<SearchDataSource>(
+    () => SearchDataSourceImpl(dioService: sl()),
+  );
 
   //! External
 
