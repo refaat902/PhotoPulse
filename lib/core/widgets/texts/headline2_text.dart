@@ -21,7 +21,7 @@ class Headline2Text extends StatelessWidget {
     this.color,
     this.fontSize,
     this.maxLines = 1,
-    this.fontFamily = 'Beiruti',
+    this.fontFamily = 'Kavoon',
     this.textDirection,
     this.isUnderLine = false,
     this.overflow = TextOverflow.ellipsis,
