@@ -47,21 +47,21 @@ class CustomBottomNavBar extends StatelessWidget {
                   width: 56.w,
                   decoration: BoxDecoration(
                     color: isActive
-                        ? AppColors.secoundaryColor
+                        ? AppColors.black
                         : Colors.transparent,
                   ),
                 ),
 
                 CustomSVGImageProvider(
                   imagePath: notSelectedIcons[index],
-                  iamgeColor: isActive ? AppColors.secoundaryColor : null,
+                  iamgeColor: isActive ? AppColors.black : AppColors.darkGreyColor,
                   width: isActive? 30.w:24.w,
                 ),
                 BodyText(
                   text: titles[index],
                   color: isActive
-                      ? AppColors.secoundaryColor
-                      : AppColors.black,
+                      ? AppColors.black
+                      : AppColors.darkGreyColor,
                 ),
               ],
             ),

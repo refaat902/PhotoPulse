@@ -14,5 +14,5 @@ void main() async {
   ]);
   await di.init();
   await ScreenUtil.ensureScreenSize();
-  runApp(DevicePreview(enabled: true, builder: (context) => PhotoPulseApp()));
+  runApp(DevicePreview(enabled: false, builder: (context) => PhotoPulseApp()));
 }

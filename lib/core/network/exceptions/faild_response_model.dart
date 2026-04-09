@@ -134,6 +134,6 @@ class FailedResponseModel {
         ? FailedResponseModelData.fromJson(json['error'])
         : null;
     code = json['code'];
-    message = json['message'] ?? ErrorMessages.Global_Error_Ar_Error;
+    message = json['message'] ?? ErrorMessages.Un_Authorized_Error_En_Err;
   }
 }
