@@ -9,7 +9,7 @@ class SearchUseCase {
 
   SearchUseCase(this.repository);
 
-  Future<Either<FailedResponseModel, SearchResponseModel>> call({required String query}) async {
-    return await repository.getPhoto(query:query);
+  Future<Either<FailedResponseModel, SearchResponseModel>> call({required String query,int? page} ) async {
+    return await repository.getPhoto(query:query, page: page);
   }
 }

@@ -6,6 +6,6 @@ import '../../../../core/network/dio_service/dio_service.dart';
 abstract class SearchDataSource {
   late DioService dioService;
 
-  Future<SearchResponseModel> getPhoto({required String query});
+  Future<SearchResponseModel> getPhoto({required String query,int? page});
 
 }

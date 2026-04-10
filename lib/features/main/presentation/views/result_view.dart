@@ -1,10 +1,13 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:photopulse/core/widgets/shimmer_widget.dart';
 import 'package:photopulse/core/widgets/texts/caption_text.dart';
+import 'package:photopulse/features/main/presentation/cubits/favorite/cubit/favorite_cubit.dart';
 import 'package:photopulse/features/main/presentation/cubits/search/search_cubit.dart';
+import 'package:photopulse/features/main/presentation/widgets/grid_view_item.dart';
+import 'package:photopulse/features/main/presentation/widgets/page_controllers.dart';
 
 class ResultView extends StatelessWidget {
   const ResultView({super.key});
@@ -14,82 +17,60 @@ class ResultView extends StatelessWidget {
     return BlocBuilder<SearchCubit, SearchState>(
       builder: (context, state) {
         if (state is GetSearchResultSuccessState) {
-          return Container(
-            width: double.infinity,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(20.r),
-              image: DecorationImage(
-                image: CachedNetworkImageProvider(
-                  SearchCubit.searchResponseModel!.photos![0].src!.original!,
-                ),
-                fit: BoxFit.cover,
-              ),
-            ),
-            child: Stack(
-              children: [
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                    vertical: 10.h,
-                    horizontal: 5.w,
+          final searchCubit = context.read<SearchCubit>();
+          return BlocBuilder<FavoriteCubit, FavoriteState>(
+            builder: (context, favoriteState) {
+              final favCubit = context.read<FavoriteCubit>();
+              return Column(
+                children: [
+                  MasonryGridView.count(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
+                    crossAxisCount: 2,
+                    mainAxisSpacing: 10.h,
+                    crossAxisSpacing: 10.w,
+                    itemCount: SearchCubit.searchResponseModel!.photos!.length,
+                    itemBuilder: (context, index) {
+                      final photo =
+                          SearchCubit.searchResponseModel!.photos![index];
+                      final id = photo.id.toString();
+                      final imageUrl = photo.src!.medium!;
+                      final favorited = favCubit.isFavorite(id);
+                      return GridViewItem(
+                        photo: photo,
+                        favorited: favorited,
+                        onFavoriteToggle: () =>
+                            favCubit.toggleFavorite(id, imageUrl),
+                      );
+                    },
                   ),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      TextButton.icon(
-                        style: TextButton.styleFrom(
-                          backgroundColor: Colors.black.withAlpha(50),
-                        ),
-                        onPressed: () {},
-                        icon: Icon(
-                          Icons.arrow_circle_left_sharp,
-                          color: Colors.white,
-                        ),
-                        label: CaptionText(
-                          text: 'Previous',
-                          color: Colors.white,
-                        ),
-                      ),
-                      TextButton(
-                        style: TextButton.styleFrom(
-                          backgroundColor: Colors.black.withAlpha(50),
-                        ),
-                        onPressed: () {},
-                        child: CaptionText(text: 'Next', color: Colors.white),
-                      ),
-                    ],
+                  PageControllers(
+                    hasPreviousPage: searchCubit.hasPreviousPage,
+                    hasNextPage: searchCubit.hasNextPage,
+                    currentPage: searchCubit.currentPage,
+                    onPrevious: () => searchCubit.previousPage(),
+                    onNext: () => searchCubit.nextPage(),
                   ),
-                ),
-                Positioned(
-                  bottom: 15.h,
-                  left: 0,
-                  right: 0,
-                  child: Center(
-                    child: TextButton.icon(
-                      style: TextButton.styleFrom(
-                        backgroundColor: Colors.black.withAlpha(50),
-                      ),
-                      onPressed: () {},
-                      icon: Icon(Icons.favorite_border, color: Colors.white),
-                      label: CaptionText(
-                        text: 'Add To Favorites',
-                        color: Colors.white,
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
+                ],
+              );
+            },
           );
         } else if (state is GetSearchResultLoadingState) {
-          return Center(
-            child: ShimmerWidget(
+          return MasonryGridView.count(
+            shrinkWrap: true,
+            physics: const NeverScrollableScrollPhysics(),
+            crossAxisCount: 2,
+            mainAxisSpacing: 10.h,
+            crossAxisSpacing: 10.w,
+            itemCount: 6,
+            itemBuilder: (context, index) => ShimmerWidget(
               height: 400.h,
               width: double.infinity,
               radius: 20.r,
             ),
           );
         }
-        return Center(child: CaptionText(text: 'Please start searching'));
+        return const Center(child: CaptionText(text: 'Please start searching'));
       },
     );
   }

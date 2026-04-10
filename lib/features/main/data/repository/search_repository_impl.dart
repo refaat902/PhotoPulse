@@ -23,9 +23,9 @@ class SearchRepositoryImpl extends SearchRepository {
   });
 
   @override
-  Future<Either<FailedResponseModel, SearchResponseModel>> getPhoto({required String query}) async {
+  Future<Either<FailedResponseModel, SearchResponseModel>> getPhoto({required String query,int? page}) async {
     try {
-      final result = await searchDataSource.getPhoto(query: query);
+      final result = await searchDataSource.getPhoto(query: query, page: page);
 
       // final userEntity = UserMapper.toUserEntity(
       //   userData: result.data!.account!,
