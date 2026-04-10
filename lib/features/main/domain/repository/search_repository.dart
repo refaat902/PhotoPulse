@@ -10,6 +10,6 @@ abstract class SearchRepository {
   late PreferenceHelper preferenceHelper;
 
 
-  Future<Either<FailedResponseModel, SearchResponseModel>> getPhoto({required String query});
+  Future<Either<FailedResponseModel, SearchResponseModel>> getPhoto({required String query,int? page});
 
 }

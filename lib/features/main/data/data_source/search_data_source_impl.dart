@@ -11,12 +11,12 @@ class SearchDataSourceImpl implements SearchDataSource {
 
   SearchDataSourceImpl({required this.dioService});
   @override
-  Future<SearchResponseModel> getPhoto({required String query}) async {
+  Future<SearchResponseModel> getPhoto({required String query,int? page}) async {
     final result = await serverRequest(
       call: () async => await dioService.get(
         endPoint: NetworkURLS.searchEndPoint,
         apiToken: 'pxUPRMD1pBQyVaNkrTxQZtnPWRT4noSHFBxGRVUNNkwzNSq3SJwsFqJC',
-        query: {'query': query},
+        query: {'query': query, 'page': page},
         
       ),
     );
