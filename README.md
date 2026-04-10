@@ -1,16 +1,63 @@
-# photopulse
+# 📌 Task Completion – Development Branch
 
-A new Flutter project.
+## Overview
 
-## Getting Started
+This repository contains the implementation of the assigned task.
+All completed work has been pushed to the **`development`** branch.
 
-This project is a starting point for a Flutter application.
+---
 
-A few resources to get you started if this is your first Flutter project:
+## 🚀 Branch to Review
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Please review the task implementation in:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+👉 **`development` branch**
+
+---
+
+## 🛠️ What’s Included
+
+* Implementation of the required features
+* Clean and structured code following best practices
+* Responsive and tested UI (if applicable)
+* Error handling and edge cases considered
+
+---
+
+## ▶️ How to Run the Project
+
+```bash
+# Clone the repository
+git clone <repo-link>
+
+# Navigate to project
+cd <project-folder>
+
+# Switch to development branch
+git checkout development
+
+# Install dependencies
+flutter pub get
+
+# Run the app
+flutter run
+```
+
+---
+
+## 📎 Notes
+
+* The `main` branch remains unchanged.
+* All task-related work is isolated in the `development` branch for easy review.
+
+---
+
+## 📬 Feedback
+
+If you have any feedback or need clarification, feel free to reach out.
+Looking forward to your review!
+
+---
+
+**Submitted by:**
+Mostafa Refaat
